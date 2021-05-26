@@ -46,4 +46,62 @@ class Contact < ApplicationRecord
   # class Account < ActiveRecord::Base
   #   validates :email, uniqueness: true
   # end
+
+  # validation opt
+  # allow_nil 
+  # class Coffee < ActiveRecord::Base
+  #   validates :size, inclusion: { in: %w(small medium large),
+  #   message: "%{value} is not a valid size" }, allow_nil: true
+  # end
+  # allow_blank 
+  # class Topic < ActiveRecord::Base
+  #   validates :title, length: { is: 5 }, allow_blank: true
+  # end
+  # message 
+  # on
+  # validates :email, uniqueness: true, on: :create
+  # validates :age, numericality: true, on: :update
+  # validates :name, presence: true, on: :save
+
+  validates :first_name, :last_name, :age, :phone, :email, presence: true 
+  validates :email, uniqueness: true 
+  validates :age, numericality: { only_integer: true }
+
+  # Callback - trigger some logic or code base on action 
+  # before_validation
+  # after_validation
+  # around_validation
+  # before_save
+  # after_save
+  # around_save
+  # before_create
+  # after_create
+  # around_create 
+  # class CreditCard < ActiveRecord::Base
+  #   before_save :encrypt_card_number
+   
+  #   private
+   
+  #     def encrypt_card_number
+  #       self.card_number = bcrypt(self.card_number)
+  #     end
+  # end
+
+  # Model methods 
+  # Fat models skinny controllers- any logic wise would be in the model , 
+  # class methods 
+  # class Person < ActiveRecord::Base
+  #   # called on a class Person.by_first_name
+  #   def self.by_first_name
+  #     order(:first_name)
+  #   end
+  # end
+
+  # instance methods
+  # class Person < ActiveRecord::Base
+  #   # called on an instance @person.full_name
+  #   def full_name
+  #    "#{self.first_name} {self.last_name}"
+  #   end
+  # end
 end
